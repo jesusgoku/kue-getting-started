@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  app:
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - '${PORT}:${PORT}'
+    command: "yarn dev:server"
+    
+
+  worker:
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules
+    command: "yarn dev:worker"

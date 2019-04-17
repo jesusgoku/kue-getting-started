@@ -2,27 +2,28 @@ version: '3.4'
 
 services:
   app:
-    image: node:dubnium-alpine
-    user: "node"
-    working_dir: /home/node/app
+    image: kue-getting-started:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     env_file: ./.env
-    volumes:
-      - ./:/home/node/app
     expose:
-      - "${PORT}"
+      - '${PORT}'
     ports:
       - '${PORT}:${PORT}'
-      # - '3001:3001'
-    command: "yarn dev:server"
+    depends_on:
+      - redis
+    command: "yarn start:server"
 
   worker:
-    image: node:dubnium-alpine
-    user: "node"
-    working_dir: /home/node/app
+    image: kue-getting-started:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     env_file: ./.env
-    volumes:
-      - ./:/home/node/app
-    command: "yarn dev:worker"
+    depends_on:
+      - redis
+    command: "yarn start:worker"
 
   redis:
     image: redis:5-alpine
