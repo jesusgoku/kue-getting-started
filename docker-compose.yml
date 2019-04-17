@@ -1,0 +1,28 @@
+version: '3.6'
+
+services:
+  app:
+    image: node:dubnium-alpine
+    user: "node"
+    working_dir: /home/node/app
+    env_file: ./.env
+    volumes:
+      - ./:/home/node/app
+    expose:
+      - "${PORT}"
+    ports:
+      - '${PORT}:${PORT}'
+      - '3001:3001'
+    command: "yarn dev:server"
+
+  worker:
+    image: node:dubnium-alpine
+    user: "node"
+    working_dir: /home/node/app
+    env_file: ./.env
+    volumes:
+      - ./:/home/node/app
+    command: "yarn dev:worker"
+
+  redis:
+    image: redis:5-alpine

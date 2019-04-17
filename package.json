@@ -1,0 +1,22 @@
+{
+  "name": "kue-getting-started",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start:server": "node -r esm src/index.js",
+    "start:worker": "node -r esm src/worker.js",
+    "dev:server": "nodemon -r esm src/index.js",
+    "dev:worker": "nodemon -r esm src/worker.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "kue": "^0.11.6"
+  },
+  "devDependencies": {
+    "dotenv": "^7.0.0",
+    "esm": "^3.2.22",
+    "nodemon": "^1.18.11"
+  }
+}
